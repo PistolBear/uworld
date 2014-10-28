@@ -1,6 +1,5 @@
 package com.sideprojects.unrepentantwaiting;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import com.sideprojects.unrepentantwaiting.actors.ActorInterface;
@@ -99,12 +98,6 @@ public class Nobody implements BaseInteractable, ActorInterface
 
 	@Override
 	public void modSkill(SkillName s, int value) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setLootable() {
 		// TODO Auto-generated method stub
 		
 	}

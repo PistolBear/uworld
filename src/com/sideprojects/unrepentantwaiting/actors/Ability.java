@@ -2,10 +2,10 @@ package com.sideprojects.unrepentantwaiting.actors;
 
 import java.util.List;
 
-import com.sideprojects.unrepentantwaiting.NamedObject;
+import com.sideprojects.unrepentantwaiting.Named;
 import com.sideprojects.unrepentantwaiting.actors.ActorInterface.AbilityName;
 
-public abstract class Ability extends NamedObject
+public abstract class Ability extends Named
 {
 	private int i_score;
 	

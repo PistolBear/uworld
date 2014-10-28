@@ -2,9 +2,9 @@ package com.sideprojects.unrepentantwaiting.actors;
 
 import java.util.List;
 
-import com.sideprojects.unrepentantwaiting.NamedObject;
+import com.sideprojects.unrepentantwaiting.Named;
 
-public abstract class Skill extends NamedObject
+public abstract class Skill extends Named
 {
 	public List<Ability> a_abilityRef;
 	
