@@ -9,7 +9,6 @@ package com.sideprojects.unrepentantwaiting.fantasyobjects;
 public interface InventoryItemInterface extends FantasyObjectInterface
 {
 	boolean m_inventoryItem = true;
-	public void generateRandItem(ItemType t);
 	
 
 }

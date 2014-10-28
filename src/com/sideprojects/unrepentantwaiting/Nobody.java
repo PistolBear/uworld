@@ -10,11 +10,6 @@ public class Nobody implements BaseInteractable, ActorInterface
 {
 
 	@Override
-	public String whoAmI() {
-		return "Nobody";
-	}
-
-	@Override
 	public int getHealth() {
 		return 0;
 	}
@@ -37,26 +32,6 @@ public class Nobody implements BaseInteractable, ActorInterface
 	}
 
 	@Override
-	public void setLootable(boolean b) 
-	{
-		// No-op
-
-	}
-
-	@Override
-	public Point getPosition() 
-	{
-		return new Point(0,0);
-	}
-
-	@Override
-	public void expendEquippedAmmunition() 
-	{
-		// No-op
-
-	}
-
-	@Override
 	public ArrayList<InventoryItemInterface> getInventoryList() 
 	{
 		return null;
@@ -72,12 +47,6 @@ public class Nobody implements BaseInteractable, ActorInterface
 	public int getGold() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public boolean hasLineOfSight(BaseInteractable bi_target) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -112,6 +81,30 @@ public class Nobody implements BaseInteractable, ActorInterface
 
 	@Override
 	public void addGold(double g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getInventoryEncumberance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setSkill(SkillName s, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modSkill(SkillName s, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setLootable() {
 		// TODO Auto-generated method stub
 		
 	}

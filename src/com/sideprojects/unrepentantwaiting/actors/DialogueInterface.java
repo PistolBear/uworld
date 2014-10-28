@@ -21,11 +21,6 @@ public interface DialogueInterface
 	public DialogueEmotion getEmotion();
 	public DialogueType getDialogueType();
 	
-	public int getTimesSpoken();
-	public int getTimesTransacted();
-	public String getOwnerName();
-	public long getOwnerID();
-	
 	public enum DialogueType
 	{
 		NONE,
