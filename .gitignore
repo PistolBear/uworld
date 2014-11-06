@@ -2,9 +2,7 @@
 ###################
 *.com
 *.class
-*.project
 *.settings
-.classpath
 
 # Packages #
 ############
