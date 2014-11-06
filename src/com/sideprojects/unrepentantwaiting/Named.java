@@ -1,6 +1,17 @@
 package com.sideprojects.unrepentantwaiting;
 
-public abstract class NamedObject 
+/**
+ * The Named abstract class is for use with things that may not necessarily be 
+ * within the realm of being interacted with by the player, but may still want to 
+ * have a stored name and description.  As such, BaseInteractable grabs these methods
+ * too.
+ * 
+ * Because of this, NamedObject also is a parent to things like Ability, Skill, etc.
+ * 
+ * @author woody
+ *
+ */
+public abstract class Named implements BaseInteractable
 {
 	protected String s_name;
 	protected String s_descriptionShort = "Object description";

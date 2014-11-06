@@ -8,7 +8,9 @@ public interface BaseInteractable
 	public void directDamage(int d);
 	public void indirectDamage(int d);
 	public void removeDamage(int d);
-	public void setLootable();
 
-
+	public enum Size
+	{
+		INFINITESSIMAL, MINISCULE, TINY, SMALL, MEDIUM, LARGE, HUGE, GIGANTIC, COLLOSAL, COSMIC;
+	}
 }

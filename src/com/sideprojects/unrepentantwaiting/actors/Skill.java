@@ -2,12 +2,12 @@ package com.sideprojects.unrepentantwaiting.actors;
 
 import java.util.List;
 
-import com.sideprojects.unrepentantwaiting.NamedObject;
+import com.sideprojects.unrepentantwaiting.Named;
 
-public abstract class Skill extends NamedObject
+public abstract class Skill extends Named
 {
-	public List<Ability> a_abilityRef;
-	
+	Ability[] a_parentAbility;
+
 	/**
 	 * Individual instances of Skills must implement these
 	 * methods.
@@ -17,20 +17,20 @@ public abstract class Skill extends NamedObject
 	public abstract void addAbility(Ability a);
 	public abstract void setAbilities(List<Ability> a);
 
-	public List<Ability> getAbilities()
+	public Ability[] getAbilities()
 	{
-		return a_abilityRef;
+		return a_parentAbility;
 	}
-	
+
 	public String longDesc()
 	{
 		return s_descriptionLong;
 	}
-	
+
 	public int doSkill()
 	{
 		int magnitude = 0;
-		for (Ability eachAbility : a_abilityRef)
+		for (Ability eachAbility : a_parentAbility)
 		{
 			magnitude += (int) (eachAbility.getScore() * .75);
 		}
