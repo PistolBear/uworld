@@ -1,22 +1,22 @@
 package com.sideprojects.unrepentantwaiting.fantasyobjects;
 
-import com.sideprojects.unrepentantwaiting.NamedObject;
+import com.sideprojects.unrepentantwaiting.Named;
 
-public class Weapon extends NamedObject implements InventoryItemInterface
+public class Weapon extends Named implements InventoryItemInterface
 {
-	private boolean b_melee;
-	private boolean b_loaded;
-	private boolean b_verbose;
-	private boolean b_magic;
-	private double  d_weight;
-	private int     i_damage;
-	private int     i_health_max;
-	private int     i_health;
-	private int     i_hardness;
-	private int     i_range;
+	protected boolean b_melee;
+	protected boolean b_loaded;
+	protected boolean b_verbose;
+	protected boolean b_magic;
+	protected double  d_weight;
+	protected int     i_damage;
+	protected int     i_health_max;
+	protected int     i_health;
+	protected int     i_hardness;
+	protected int     i_range;
 	
-	private WeaponType wt_type;
-	private boolean b_lootable;
+	protected WeaponType wt_type;
+	protected boolean b_lootable;
 	
 	public enum WeaponType
 	{
@@ -28,19 +28,55 @@ public class Weapon extends NamedObject implements InventoryItemInterface
 		WAND;
 	}
 
+	/**
+	 * Sets default values.
+	 */
 	public Weapon()
 	{
-		b_verbose  = true;
-		b_magic    = false;
-		b_loaded   = false;
-		b_melee    = true;
-		d_weight   = 0;
-		i_range    = 0;
-		i_damage   = 0;
+		b_melee = true;
+		b_loaded = false;
+		b_verbose = false;
+		b_magic = false;
+		d_weight = 1.0;
+		i_damage = 1;
 		i_health_max = 5;
-		i_health   = 5;
-		i_hardness = 0;
-		s_name = new String();
+		i_health = 5;
+		i_hardness = 2;
+		i_range = 0;
+		
+		wt_type = WeaponType.SIMPLE;
+		b_lootable = true;
+	}
+
+	/**
+	 * Some quick defaults for unusual weapons, like wands and dual weapons.
+	 * A dual weapon's damage is determined by the same i_damage field,
+	 * but the heads of the weapon will have a special modifier that is applied to it.
+	 * 
+	 * For instance, a gnomish hammerpick may have damage on the heavier hammer side
+	 * be 
+	 * @param w
+	 */
+	public Weapon(WeaponType w)
+	{
+		this();
+		wt_type = w;
+		
+		if (w == WeaponType.DUAL)
+		{
+
+			i_health_max = i_health = 10;
+			i_hardness = 1;
+		}
+		
+		if (w == WeaponType.WAND)
+		{
+			b_magic = true;
+			i_hardness = 1;
+			i_health_max = 2;
+			i_health = 2;
+			i_range = 50;
+		}
 		
 	}
 
@@ -98,7 +134,7 @@ public class Weapon extends NamedObject implements InventoryItemInterface
 	}
 
 	/**
-	 * Apply damaage to weapon, ignoring hardness.
+	 * Apply damage to weapon, ignoring hardness.
 	 */
 	@Override
 	public void indirectDamage(int d) 
@@ -121,18 +157,6 @@ public class Weapon extends NamedObject implements InventoryItemInterface
 		removeDamage(d-1);
 	}
 
-	/**
-	 * Item can be picked up by player
-	 */
-	@Override
-	public void setLootable() 
-	{
-		if (b_lootable)
-			b_lootable = false;
-		else
-			b_lootable = true;
-	}
-
 	@Override
 	public void setName(String s)
 	{
@@ -148,6 +172,16 @@ public class Weapon extends NamedObject implements InventoryItemInterface
 			s = "Used as a weapon";
 		s_descriptionShort = s;
 		
+	}
+	
+	public int getPower()
+	{
+		return i_damage;
+	}
+	
+	public int getRange()
+	{
+		return i_range;
 	}
 	
 }
