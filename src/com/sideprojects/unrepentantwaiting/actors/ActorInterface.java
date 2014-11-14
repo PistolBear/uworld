@@ -3,7 +3,6 @@ package com.sideprojects.unrepentantwaiting.actors;
 import java.util.List;
 
 import com.sideprojects.unrepentantwaiting.BaseInteractable;
-import com.sideprojects.unrepentantwaiting.fantasyobjects.FantasyObjectInterface;
 import com.sideprojects.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
 
 public interface ActorInterface extends BaseInteractable
@@ -12,6 +11,7 @@ public interface ActorInterface extends BaseInteractable
 
    public String getArmorType();
 
+   @SuppressWarnings("rawtypes")
    public List getInventoryList();
 
    public int getInventorySize();

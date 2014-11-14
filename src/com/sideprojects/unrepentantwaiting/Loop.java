@@ -9,6 +9,8 @@ import java.awt.event.*;
 
 public class Loop extends JFrame implements ActionListener
 {
+   private static final long serialVersionUID = 5556579242006622965L;
+
    private GamePanel gamePanel;
 
    private JButton menuButton = new JButton("Start");
@@ -47,7 +49,6 @@ public class Loop extends JFrame implements ActionListener
       menuButton.addActionListener(this);
       quitButton.addActionListener(this);
       pauseButton.addActionListener(this);
-      String s = "frog";
    }
 
    private int modeDialog(JFrame frame)
