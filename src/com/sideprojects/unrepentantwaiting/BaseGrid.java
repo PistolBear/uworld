@@ -2,6 +2,8 @@ package com.sideprojects.unrepentantwaiting;
 
 import java.awt.Point;
 
+import com.sideprojects.unrepentantwaiting.gui.DisplayMode;
+
 /**
  * BaseGrid Presents a construct for defining useable and unuseable spaces in
  * overworlds, taverns, and other scenes. Creates basis for the MapInterface as

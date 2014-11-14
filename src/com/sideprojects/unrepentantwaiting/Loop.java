@@ -2,6 +2,8 @@ package com.sideprojects.unrepentantwaiting;
 
 import javax.swing.*;
 
+import com.sideprojects.unrepentantwaiting.gui.GamePanel;
+
 import java.awt.*;
 import java.awt.event.*;
 
