@@ -2,9 +2,6 @@
 ###################
 *.com
 *.class
-*.project
-*.settings
-.classpath
 
 # Packages #
 ############
@@ -32,16 +29,4 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-B
-D
-B
-A
-C
-D
-D
-D
-D
-B
-A
 
