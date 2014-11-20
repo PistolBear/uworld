@@ -1,8 +1,8 @@
-package com.sideprojects.unrepentantwaiting;
+package com.unrepentantwaiting.main;
 
 import java.awt.Point;
 
-import com.sideprojects.unrepentantwaiting.gui.DisplayMode;
+import com.unrepentantwaiting.gui.DisplayMode;
 
 /**
  * BaseGrid Presents a construct for defining useable and unuseable spaces in

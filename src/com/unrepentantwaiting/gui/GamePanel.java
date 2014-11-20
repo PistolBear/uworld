@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.gui;
+package com.unrepentantwaiting.gui;
 
 import java.awt.*;
 
@@ -11,7 +11,7 @@ public class GamePanel extends JPanel
 
    private static boolean b_usingGui = false;
 
-   GamePanel()
+   private GamePanel()
    {
       super(true);
       layman = new GroupLayout(this);
@@ -20,13 +20,21 @@ public class GamePanel extends JPanel
 
       Canvas canvas = new Canvas();
 
+      if (this.isVisible())
+      {
+         if (getParent() instanceof JFrame)
+         {
+            JFrame temp = (JFrame) getParent();
+            temp.setTitle("Game is running...");
+         }
+      }
       this.setAlignmentX(0.0f);
       this.setAlignmentY(0.0f);
       this.setPreferredSize(new Dimension(640, 480));
 
    }
 
-   GamePanel(boolean gui)
+   public GamePanel(boolean gui)
    {
       this();
       b_usingGui = gui;

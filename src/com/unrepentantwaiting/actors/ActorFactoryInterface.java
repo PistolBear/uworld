@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.actors;
+package com.unrepentantwaiting.actors;
 
 import java.util.ArrayList;
 

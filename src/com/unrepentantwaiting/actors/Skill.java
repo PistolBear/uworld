@@ -1,8 +1,8 @@
-package com.sideprojects.unrepentantwaiting.actors;
+package com.unrepentantwaiting.actors;
 
 import java.util.List;
 
-import com.sideprojects.unrepentantwaiting.Named;
+import com.unrepentantwaiting.main.Named;
 
 public abstract class Skill extends Named
 {

@@ -1,60 +1,43 @@
-package com.sideprojects.unrepentantwaiting;
+package com.unrepentantwaiting.main;
 
 import javax.swing.*;
 
-import com.sideprojects.unrepentantwaiting.gui.GamePanel;
+import com.unrepentantwaiting.gui.GamePanel;
+import com.unrepentantwaiting.gui.UWSwingGui;
 
 import java.awt.*;
 import java.awt.event.*;
 
-public class Loop extends JFrame implements ActionListener
+public class Loop implements ActionListener
 {
    private static final long serialVersionUID = 5556579242006622965L;
-
+   private final UWSwingGui theGui; 
    private GamePanel gamePanel;
-
-   private JButton menuButton = new JButton("Start");
-
-   private JButton quitButton = new JButton("Quit");
-
-   private JButton pauseButton = new JButton("Pause");
-
-   private boolean running = false;
-
-   private boolean paused = false;
-
-   private int fps = 60;
-
-   private int frameCount = 0;
-
    private GameEngine gameEngine;
+   private Renderer renderer;
+   private JButton menuButton = new JButton("Start");
+   private JButton quitButton = new JButton("Quit");
+   private JButton pauseButton = new JButton("Pause");
+   private JButton newGameButton = new JButton("New");
+   private boolean b_running = false;
+   private boolean b_paused = false;
+   private static boolean b_useGui;
+   private static final double TARGET_FPS = 60;
+   private int i_frameCount = 0;
+   private int i_currentFPS = 0;
 
+   // Loop Constructor
    public Loop()
    {
-      super("Fixed Timestep Game Loop Test");
-      Container cp = getContentPane();
-      cp.setLayout(new BorderLayout());
-      JPanel p = new JPanel();
-      this.modeDialog(this);
-
-      p.setLayout(new GridLayout(1, 2));
-      p.add(menuButton);
-      p.add(pauseButton);
-      p.add(quitButton);
-
-      cp.add(gamePanel, BorderLayout.CENTER);
-      cp.add(p, BorderLayout.SOUTH);
-      setSize(500, 500);
-
+      theGui = new UWSwingGui();
+      theGui.AskABoolean("Some Question");
+      
+      gamePanel = new GamePanel(b_useGui);
+      
       menuButton.addActionListener(this);
       quitButton.addActionListener(this);
       pauseButton.addActionListener(this);
-   }
-
-   private int modeDialog(JFrame frame)
-   {
-
-      return JOptionPane.showInternalConfirmDialog(frame, "Graphics?", "Graphics or Console?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+      newGameButton.addActionListener(this);
    }
 
    public void actionPerformed(ActionEvent e)
@@ -62,8 +45,8 @@ public class Loop extends JFrame implements ActionListener
       Object s = e.getSource();
       if (s == menuButton)
       {
-         paused = !paused;
-         if (paused)
+         b_paused = !b_paused;
+         if (b_paused)
          {
             menuButton.setText("Close Menu");
          }
@@ -77,11 +60,12 @@ public class Loop extends JFrame implements ActionListener
 
       else if (s == pauseButton)
       {
-         paused = !paused;
-         if (paused)
+         b_paused = !b_paused;
+         if (b_paused)
          {
             pauseButton.setText("Unpause");
          }
+         
          else
          {
             pauseButton.setText("Pause");
@@ -92,21 +76,55 @@ public class Loop extends JFrame implements ActionListener
       {
          System.exit(0);
       }
+      
+      else if (s == newGameButton)
+      {
+         newGame(b_useGui);
+      }
+      
+      else if (s instanceof JOptionPane)
+      {
+         
+      }
+         
    }
 
-   // Starts a new thread and runs the game loop in it.
+   /**
+    * @param b_useGui2
+    */
+   private void newGame(boolean b_useGui2)
+   {
+      // Create a character and do other first-time things, like
+      // explaining the game.
+      
+      
+      // run the game loop
+   }
+
+
+   /**
+    * runGameLoop
+    * 
+    * Primary loop thread
+    */
    public void runGameLoop()
    {
-      Thread loop = new Thread()
+      gamePanel.setVisible(true);
+      
+      // game is its own thread
+      Thread game = new Thread()
       {
          @Override
          public void run()
          {
+            // game loop calls the renderer when it's ready
             gameLoop();
          }
       };
 
-      loop.start();
+      
+      // All of that is defined, so here's where we start the game:
+      game.start();
    }
 
    // Only run this in another Thread!
@@ -121,25 +139,24 @@ public class Loop extends JFrame implements ActionListener
       // render.
       // If you're worried about visual hitches more than perfect timing, set
       // this to 1.
-      final int MAX_UPDATES_BEFORE_RENDER = 5;
+      final int MAX_UPDATES_BEFORE_RENDER = 3;
       // We will need the last update time.
       double lastUpdateTime = System.nanoTime();
       // Store the last time we rendered.
       double lastRenderTime = System.nanoTime();
 
       // If we are able to get as high as this FPS, don't render again.
-      final double TARGET_FPS = 60;
       final double TARGET_TIME_BETWEEN_RENDERS = 1000000000 / TARGET_FPS;
 
       // Simple way of finding FPS.
       int lastSecondTime = (int) (lastUpdateTime / 1000000000);
 
-      while (running)
+      while (b_running)
       {
          double now = System.nanoTime();
          int updateCount = 0;
 
-         if (!paused)
+         if (!b_paused)
          {
             // Do as many game updates as we need to, potentially playing
             // catchup.
@@ -169,9 +186,9 @@ public class Loop extends JFrame implements ActionListener
             int thisSecond = (int) (lastUpdateTime / 1000000000);
             if (thisSecond > lastSecondTime)
             {
-               System.out.println("NEW SECOND " + thisSecond + " " + frameCount);
-               fps = frameCount;
-               frameCount = 0;
+               System.out.println("NEW SECOND " + thisSecond + " " + i_frameCount);
+               i_currentFPS  = i_frameCount;
+               i_frameCount = 0;
                lastSecondTime = thisSecond;
             }
 
@@ -185,15 +202,13 @@ public class Loop extends JFrame implements ActionListener
                // this slightly less accurate, but is worth it.
                // You can remove this line and it will still work (better),
                // your CPU just climbs on certain OSes.
-               // FYI on some OS's this can cause pretty bad stuttering.
-               // Scroll down and have a look at different peoples'
-               // solutions to this.
                try
                {
                   Thread.sleep(1);
                }
                catch (Exception e)
                {
+                  System.out.println(e.getStackTrace());
                }
 
                now = System.nanoTime();
@@ -202,6 +217,38 @@ public class Loop extends JFrame implements ActionListener
       }
    }
 
+   /**
+    * @return the gamePanel
+    */
+   public GamePanel getGamePanel()
+   {
+      return gamePanel;
+   }
+
+   /**
+    * @return the targetFps
+    */
+   public static double getTargetFps()
+   {
+      return TARGET_FPS;
+   }
+
+   /**
+    * @return the gameEngine
+    */
+   public GameEngine getGameEngine()
+   {
+      return gameEngine;
+   }
+
+   /**
+    * @return the i_currentFPS
+    */
+   public int getI_currentFPS()
+   {
+      return i_currentFPS;
+   }
+   
    private void updateLogic()
    {
       gameEngine.update();
@@ -210,5 +257,7 @@ public class Loop extends JFrame implements ActionListener
 
    private void drawGame(float interpolation)
    {
+      // Doesn't really do anything.
+      renderer.getComponent().isVisible();
    }
 }

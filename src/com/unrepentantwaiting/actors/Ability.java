@@ -1,9 +1,9 @@
-package com.sideprojects.unrepentantwaiting.actors;
+package com.unrepentantwaiting.actors;
 
 import java.util.List;
 
-import com.sideprojects.unrepentantwaiting.Named;
-import com.sideprojects.unrepentantwaiting.actors.ActorInterface.AbilityName;
+import com.unrepentantwaiting.actors.ActorInterface.AbilityName;
+import com.unrepentantwaiting.main.Named;
 
 public abstract class Ability extends Named
 {

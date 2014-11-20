@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.fantasyobjects;
+package com.unrepentantwaiting.fantasyobjects;
 
 /**
  * For use with items that can be put in an inventory

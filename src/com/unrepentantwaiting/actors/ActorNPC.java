@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.actors;
+package com.unrepentantwaiting.actors;
 
 public interface ActorNPC extends ActorInterface
 {

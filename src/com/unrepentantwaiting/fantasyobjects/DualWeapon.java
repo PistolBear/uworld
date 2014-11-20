@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.fantasyobjects;
+package com.unrepentantwaiting.fantasyobjects;
 
 /**
  * DualWeapons have a few special things special about them, due to them having

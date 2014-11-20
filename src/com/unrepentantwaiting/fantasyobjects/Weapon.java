@@ -1,6 +1,6 @@
-package com.sideprojects.unrepentantwaiting.fantasyobjects;
+package com.unrepentantwaiting.fantasyobjects;
 
-import com.sideprojects.unrepentantwaiting.Named;
+import com.unrepentantwaiting.main.Named;
 
 public class Weapon extends Named implements InventoryItemInterface
 {

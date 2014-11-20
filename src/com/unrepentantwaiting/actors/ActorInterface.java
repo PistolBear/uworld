@@ -1,9 +1,9 @@
-package com.sideprojects.unrepentantwaiting.actors;
+package com.unrepentantwaiting.actors;
 
 import java.util.List;
 
-import com.sideprojects.unrepentantwaiting.BaseInteractable;
-import com.sideprojects.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
+import com.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
+import com.unrepentantwaiting.main.BaseInteractable;
 
 public interface ActorInterface extends BaseInteractable
 {

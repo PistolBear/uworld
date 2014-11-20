@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting;
+package com.unrepentantwaiting.main;
 
 public interface BaseInteractable
 {

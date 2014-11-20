@@ -1,6 +1,6 @@
-package com.sideprojects.unrepentantwaiting.fantasyobjects;
+package com.unrepentantwaiting.fantasyobjects;
 
-import com.sideprojects.unrepentantwaiting.BaseInteractable;
+import com.unrepentantwaiting.main.BaseInteractable;
 
 /**
  * Everything from chests and chairs to goblins heirs can provide this info.

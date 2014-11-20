@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting;
+package com.unrepentantwaiting.main;
 
 /**
  * The Named abstract class is for use with things that may not necessarily be

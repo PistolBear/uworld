@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.actors;
+package com.unrepentantwaiting.actors;
 
 /**
  * Dialogue Interface provides the framework for creating Dialogue objects that

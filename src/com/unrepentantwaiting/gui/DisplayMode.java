@@ -1,4 +1,4 @@
-package com.sideprojects.unrepentantwaiting.gui;
+package com.unrepentantwaiting.gui;
 
 public enum DisplayMode {
    GUI, CONSOLE, SPECIAL;

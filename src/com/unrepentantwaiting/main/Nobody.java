@@ -1,9 +1,9 @@
-package com.sideprojects.unrepentantwaiting;
+package com.unrepentantwaiting.main;
 
 import java.util.ArrayList;
 
-import com.sideprojects.unrepentantwaiting.actors.ActorInterface;
-import com.sideprojects.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
+import com.unrepentantwaiting.actors.ActorInterface;
+import com.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
 
 public class Nobody implements BaseInteractable, ActorInterface
 {
