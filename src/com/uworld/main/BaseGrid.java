@@ -1,8 +1,6 @@
-package com.unrepentantwaiting.main;
+package com.uworld.main;
 
 import java.awt.Point;
-
-import com.unrepentantwaiting.gui.DisplayMode;
 
 /**
  * BaseGrid Presents a construct for defining useable and unuseable spaces in
@@ -23,6 +21,6 @@ public interface BaseGrid
 
    public boolean[][] getFog();
 
-   public void displayGrid(DisplayMode d);
+//   public void displayGrid(DisplayMode d);
 
 }

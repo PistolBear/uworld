@@ -1,12 +1,14 @@
-package com.unrepentantwaiting.actors;
+package com.uworld.actors;
 
 import java.util.List;
 
-import com.unrepentantwaiting.main.Named;
+import com.uworld.actors.ActorInterface.AbilityName;
+import com.uworld.main.Named;
 
-public abstract class Skill extends Named
+public abstract class Skill implements Named
 {
    Ability[] a_parentAbility;
+   Double d_value = 0.0;
 
    /**
     * Individual instances of Skills must implement these methods.
@@ -15,7 +17,7 @@ public abstract class Skill extends Named
 
    public abstract ActorInterface getOwner();
 
-   public abstract void addAbility(Ability a);
+   public abstract void addAbility(AbilityName a);
 
    public abstract void setAbilities(List<Ability> a);
 
@@ -38,5 +40,10 @@ public abstract class Skill extends Named
       }
 
       return magnitude;
+   }
+
+   public void setValue(Number value)
+   {
+      d_value = (double) value;      
    }
 }

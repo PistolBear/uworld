@@ -1,4 +1,4 @@
-package com.unrepentantwaiting.actors;
+package com.uworld.actors;
 
 public interface ActorNPC extends ActorInterface
 {

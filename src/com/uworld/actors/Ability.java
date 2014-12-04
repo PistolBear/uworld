@@ -1,15 +1,17 @@
-package com.unrepentantwaiting.actors;
+package com.uworld.actors;
 
 import java.util.List;
 
-import com.unrepentantwaiting.actors.ActorInterface.AbilityName;
-import com.unrepentantwaiting.main.Named;
+import com.uworld.actors.ActorInterface.AbilityName;
+import com.uworld.main.Named;
 
-public abstract class Ability extends Named
+public abstract class Ability implements Named
 {
    private int i_score;
 
    private boolean b_nameInitialized = false;
+
+   private String s_name;
 
    /**
     * Returns a List of the skills this ability affects. Will depend on

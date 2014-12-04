@@ -1,32 +1,22 @@
-package com.unrepentantwaiting.fantasyobjects;
+package com.uworld.fantasyobjects;
 
-import com.unrepentantwaiting.main.Named;
+import com.uworld.main.Named;
 
-public class Weapon extends Named implements InventoryItemInterface
+public abstract class Weapon implements Named, InventoryItemInterface
 {
    protected boolean b_melee;
-
    protected boolean b_loaded;
-
    protected boolean b_verbose;
-
    protected boolean b_magic;
-
    protected double d_weight;
-
    protected int i_damage;
-
    protected int i_health_max;
-
    protected int i_health;
-
    protected int i_hardness;
-
    protected int i_range;
-
    protected WeaponType wt_type;
-
    protected boolean b_lootable;
+   private String s_name;
 
    public enum WeaponType {
       DUAL, // DUAL items can be ranged OR melee. Primary use is indicated by
@@ -144,16 +134,6 @@ public class Weapon extends Named implements InventoryItemInterface
    }
 
    /**
-    * Apply damage to weapon, ignoring hardness.
-    */
-   @Override
-   public void indirectDamage(int d)
-   {
-      i_health = i_health - d;
-
-   }
-
-   /**
     * Repairing an item cannot go over its max
     */
    @Override
@@ -179,7 +159,7 @@ public class Weapon extends Named implements InventoryItemInterface
    {
       if (s == null)
          s = "Used as a weapon";
-      s_descriptionShort = s;
+//      s_descriptionShort = s;
 
    }
 

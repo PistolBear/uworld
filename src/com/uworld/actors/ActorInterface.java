@@ -1,37 +1,32 @@
-package com.unrepentantwaiting.actors;
+package com.uworld.actors;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
-import com.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
-import com.unrepentantwaiting.main.BaseInteractable;
+import com.uworld.fantasyobjects.InventoryItemInterface;
+import com.uworld.main.BaseInteractable;
 
 public interface ActorInterface extends BaseInteractable
 {
    public int getArmorValue();
-
    public String getArmorType();
-
    @SuppressWarnings("rawtypes")
    public List getInventoryList();
-
    public int getInventorySize();
-
    public int getInventoryEncumberance();
-
    public int getGold();
-
    public boolean getHostile(ActorInterface a);
-
    public void setHostile(ActorInterface a);
-
    public void addInventoryItem(InventoryItemInterface i);
-
    public void addGold(double g);
-
    public void setSkill(SkillName s, int value);
-
    public void modSkill(SkillName s, int value);
+   public Faction getFaction();
 
+   
+   
    public enum SkillName {
       MELEE_ATTACK, RANGED_ATTACK, MAGIC_ATTACK, MAGIC_EFFECT, USE_ROPE, ACROBATICS, PROFESSION, DIPLOMACY, BLUFF, SENSE_MOTIVE, PICK_LOCK, SET_TRAP, PERCEIVE_SOUND, PERCEIVE_LIGHT, PERCEIVE_SENT, CRAFT_ITEM, TRIP, HIDE, TRACK, GUESS, REMEMBER, HAUL, PUSH_SELF, CALM_OTHER, BEAST_HANDLING, TRAIN_OTHER, TRAIN_ANIMAL, BARTER, CHEAT, CONCEAL, AVOID_PANIC, ENDURE, CLOT, LUCK;
    }
@@ -61,7 +56,8 @@ public interface ActorInterface extends BaseInteractable
       }
    }
 
-   public enum AbilityNameExtended {
+   public enum AbilityNameExtended 
+   {
       CONSTITUTION, AGILITY, KNOWLEDGE, WILLPOWER, NONE;
 
       public AbilityName shortAbilityName(AbilityNameExtended n)
@@ -79,6 +75,60 @@ public interface ActorInterface extends BaseInteractable
             default:
                return AbilityName.NON;
          }
+      }
+   }
+   
+   public enum Faction
+   {
+      COMMONER, MILITARY, TRAINER, CLERGY_GOOD, CLERGY_EVIL, NOBLE, HIGH_COMMONER, SLUM, 
+      REDBEAK, PIRATE, NORTHERNER, SOUTHERNER, WESTERNER, EASTERNER, MINIQUEST, CELESTIAL,
+      INFERNAL, BANDIT, ERUDITE, ABNEGATE, ARCANA, STRANDS_OF_THE_EAST, HALFBLOOD, FULLBLOOD,
+      SPECIAL0, SPECIAL1, SPECIAL2, SPECIAL3, SPECIAL4, SPECIAL5, ALL, NONE;
+
+      /**
+       * @return
+       */
+      public List<Faction> getCommonEnemies()
+      {
+         LinkedList<Faction> enemies = new LinkedList<Faction>();
+         switch (this)
+         {
+            
+            case COMMONER:
+               enemies.add(ERUDITE);
+            case ERUDITE:
+               enemies.add(NOBLE);
+            case NOBLE:
+            case MILITARY:
+               enemies.add(INFERNAL);
+               enemies.add(REDBEAK);
+               enemies.add(PIRATE);
+               enemies.add(BANDIT);
+               enemies.add(STRANDS_OF_THE_EAST);
+               break;
+               
+               
+            case HALFBLOOD:
+               enemies.add(FULLBLOOD);
+            case FULLBLOOD:
+               enemies.add(HALFBLOOD);
+               break;
+               
+            case CELESTIAL:
+               enemies.clear();
+               enemies.add(INFERNAL);
+               break;
+               
+            case INFERNAL:
+               Faction [] f = new Faction[] {COMMONER, MILITARY, TRAINER, CLERGY_GOOD, CLERGY_EVIL, NOBLE, HIGH_COMMONER, 
+                        SLUM, REDBEAK, PIRATE, NORTHERNER, SOUTHERNER, WESTERNER, EASTERNER, MINIQUEST, CELESTIAL,
+                        INFERNAL, BANDIT, ERUDITE, ABNEGATE, ARCANA, STRANDS_OF_THE_EAST, HALFBLOOD, FULLBLOOD};
+               enemies.addAll(Arrays.asList(f));
+               enemies.remove(INFERNAL);
+               break;
+         }
+         
+         return enemies;
       }
    }
 }

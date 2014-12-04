@@ -1,4 +1,4 @@
-package com.unrepentantwaiting.main;
+package com.uworld.main;
 
 public interface BaseInteractable
 {
@@ -7,8 +7,8 @@ public interface BaseInteractable
    public int getHealth();
 
    public void directDamage(int d);
-
-   public void indirectDamage(int d);
+   
+   void indirectDamage(int d, DamageType damageType);
 
    public void removeDamage(int d);
 

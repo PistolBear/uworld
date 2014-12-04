@@ -1,6 +1,6 @@
-package com.unrepentantwaiting.fantasyobjects;
+package com.uworld.fantasyobjects;
 
-import com.unrepentantwaiting.main.BaseInteractable;
+import com.uworld.main.BaseInteractable;
 
 /**
  * Everything from chests and chairs to goblins heirs can provide this info.
@@ -9,9 +9,10 @@ import com.unrepentantwaiting.main.BaseInteractable;
  */
 public interface FantasyObjectInterface extends BaseInteractable
 {
+   boolean m_inventoryItem = false;
+   
    public boolean isWeapon();
-
    public boolean isEdible();
-
    public boolean isWearable();
+   public int getEncumberance();
 }

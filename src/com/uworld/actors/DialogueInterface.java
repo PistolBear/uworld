@@ -1,4 +1,4 @@
-package com.unrepentantwaiting.actors;
+package com.uworld.actors;
 
 /**
  * Dialogue Interface provides the framework for creating Dialogue objects that
@@ -22,6 +22,10 @@ public interface DialogueInterface
    public DialogueEmotion getEmotion();
 
    public DialogueType getDialogueType();
+   
+   public boolean exists();
+
+   public void append(DialogueInterface di);
 
    public enum DialogueType {
       NONE, GREETING, FAREWELL, SHOP, BATTLECRY;
@@ -38,4 +42,6 @@ public interface DialogueInterface
    public enum DialogueJargon {
       NONE, TRADE, SAILOR, ARCANIST, POLITICIAN, NOBILITY, COMMONFOLK, SLUMFOLK;
    }
+
+
 }

@@ -1,9 +1,9 @@
-package com.unrepentantwaiting.main;
+package com.uworld.main;
 
 import java.util.ArrayList;
 
-import com.unrepentantwaiting.actors.ActorInterface;
-import com.unrepentantwaiting.fantasyobjects.InventoryItemInterface;
+import com.uworld.actors.ActorInterface;
+import com.uworld.fantasyobjects.InventoryItemInterface;
 
 public class Nobody implements BaseInteractable, ActorInterface
 {
@@ -21,13 +21,6 @@ public class Nobody implements BaseInteractable, ActorInterface
    }
 
    @Override
-   public void indirectDamage(int d)
-   {
-      // No-op
-
-   }
-
-   @Override
    public void removeDamage(int d)
    {
       // No-op
@@ -40,6 +33,20 @@ public class Nobody implements BaseInteractable, ActorInterface
       return null;
    }
 
+   @Override
+   public void modSkill(SkillName s, int value)
+   {
+      // no-op
+
+   }
+
+   @Override
+   public void indirectDamage(int d, DamageType damageType)
+   {
+      // no-op
+      
+   }
+   
    @Override
    public int getInventorySize()
    {
@@ -111,10 +118,8 @@ public class Nobody implements BaseInteractable, ActorInterface
    }
 
    @Override
-   public void modSkill(SkillName s, int value)
+   public Faction getFaction()
    {
-      // TODO Auto-generated method stub
-
+      return Faction.NONE;
    }
-
 }
