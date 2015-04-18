@@ -3,6 +3,7 @@ package com.uworld.main;
 import javax.swing.JOptionPane;
 
 import com.uworld.gui.UWSwingGui;
+import com.uworld.zork.ZorkGameEngine;
 
 /**
  * Starting point for UWorld.
@@ -12,23 +13,32 @@ import com.uworld.gui.UWSwingGui;
 public class RunMe
 {
    
-   static GameEngine ge_engine;
+   static GameInterface ge_engine;
    static UWSwingGui theGui;
    
 
    public static void main(String[] args)
    {
-      int answer = JOptionPane.showConfirmDialog(null, "Use GUI?");
-      System.out.println("Answer chosen for initial dialog (GUI?): " + answer);
-
-      if (answer == 2)
+      if (GameInterface.NON_GRAPHICS_ENFORCED)
       {
-         System.exit(answer);
+         int answer = JOptionPane.showConfirmDialog(null, "Use GUI?");
+         System.out.println("Answer chosen for initial dialog (GUI?): " + answer);
+   
+         if (answer == 2)
+         {
+            System.exit(answer);
+         }
+   
+         ge_engine = new ZorkGameEngine();
+         UWSwingGui.setMode(answer);
+         UWSwingGui.prepareGui();
       }
-
-      ge_engine = new GameEngine();
-      UWSwingGui.setMode(answer);
-      ge_engine.getGui().prepareGui();
+      
+      else
+      {
+         
+         
+      }
    }
 
 }

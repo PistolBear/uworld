@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * GameDrawPanel
  * 
  *   Currently marked as Deprecated as it has not been fully implemented yet.  
- *   Need to add graphical interace here.
+ *   Need to add graphical interface here.
  * 
  * @author PistolBear
  *

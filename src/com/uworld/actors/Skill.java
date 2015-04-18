@@ -2,7 +2,7 @@ package com.uworld.actors;
 
 import java.util.List;
 
-import com.uworld.actors.ActorInterface.AbilityName;
+import com.uworld.actors.IActor.AbilityName;
 import com.uworld.main.Named;
 
 public abstract class Skill implements Named
@@ -15,7 +15,7 @@ public abstract class Skill implements Named
     */
    public abstract void setName();
 
-   public abstract ActorInterface getOwner();
+   public abstract IActor getOwner();
 
    public abstract void addAbility(AbilityName a);
 

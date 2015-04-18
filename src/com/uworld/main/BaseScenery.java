@@ -18,10 +18,10 @@ public interface BaseScenery
 
    public boolean getImportant();
 
-   public String getSpecial(BaseInteractable b); // For inspecting interactive
+   public String getSpecial(IBaseInteractable b); // For inspecting interactive
                                                  // items from the scene
 
-   public List<BaseInteractable> getContainedInteractables();
+   public List<IBaseInteractable> getContainedInteractables();
 
    public List<BaseScenery> getContainedScenery();
 

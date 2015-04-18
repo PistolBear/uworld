@@ -50,7 +50,7 @@ public class DualWeapon extends Weapon
    }
 
    /* (non-Javadoc)
-    * @see com.uworld.main.BaseInteractable#indirectDamage(int, com.uworld.main.DamageType)
+    * @see com.uworld.main.IBaseInteractable#indirectDamage(int, com.uworld.main.DamageType)
     */
    @Override
    public void indirectDamage(int d, DamageType damageType)

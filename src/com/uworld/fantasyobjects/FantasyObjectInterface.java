@@ -1,13 +1,13 @@
 package com.uworld.fantasyobjects;
 
-import com.uworld.main.BaseInteractable;
+import com.uworld.main.IBaseInteractable;
 
 /**
  * Everything from chests and chairs to goblins heirs can provide this info.
  * 
  * @author woody
  */
-public interface FantasyObjectInterface extends BaseInteractable
+public interface FantasyObjectInterface extends IBaseInteractable
 {
    boolean m_inventoryItem = false;
    

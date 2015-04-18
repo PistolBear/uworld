@@ -2,7 +2,7 @@ package com.uworld.actors;
 
 import java.util.List;
 
-import com.uworld.actors.ActorInterface.AbilityName;
+import com.uworld.actors.IActor.AbilityName;
 import com.uworld.main.Named;
 
 public abstract class Ability implements Named

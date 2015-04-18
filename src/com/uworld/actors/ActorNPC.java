@@ -1,6 +1,6 @@
 package com.uworld.actors;
 
-public interface ActorNPC extends ActorInterface
+public interface ActorNPC extends IActor
 {
    public boolean getLootable();
 

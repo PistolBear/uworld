@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.SortedSet;
 
-import com.uworld.fantasyobjects.InventoryItemInterface;
+import com.uworld.fantasyobjects.IInventoryItem;
 import com.uworld.main.DamageType;
 import com.uworld.main.Named;
 import com.uworld.actors.DialogueInterface;
@@ -23,22 +23,23 @@ import com.uworld.actors.DialogueInterface;
  * @author PistolBear
  *
  */
-public abstract class POM implements ActorNPC, ActorInterface, Named
+public abstract class POM implements ActorPC, ActorNPC, IActor, Named
 {
    private int i_health;
    private int i_armor;
    private String s_name;
    private int i_healthMax;
    private String s_armorType;
-   private List<InventoryItemInterface> l_inventoryList;
+   private List<IInventoryItem> l_inventoryList;
    private int i_gold;
-   private List<ActorInterface> l_explicitEnemies;
+   private List<IActor> l_explicitEnemies;
    private List<Skill> l_skills;
    private DialogueInterface di_dialog;
    private String s_description;
    private String s_longDescription;
    private boolean b_lootable;
    private List<Faction> l_faction;
+   protected int i_level;
 
    @Override
    public int getHealth()
@@ -85,7 +86,7 @@ public abstract class POM implements ActorNPC, ActorInterface, Named
    }
 
    @Override
-   public List<InventoryItemInterface> getInventoryList()
+   public List<IInventoryItem> getInventoryList()
    {
       return l_inventoryList;
    }
@@ -100,7 +101,7 @@ public abstract class POM implements ActorNPC, ActorInterface, Named
    public int getInventoryEncumberance()
    {
       int total = 0;
-      for (InventoryItemInterface i : l_inventoryList)
+      for (IInventoryItem i : l_inventoryList)
       {
          total += i.getEncumberance();
       }
@@ -115,7 +116,7 @@ public abstract class POM implements ActorNPC, ActorInterface, Named
    }
 
    @Override
-   public boolean getHostile(ActorInterface a)
+   public boolean getHostile(IActor a)
    {
       List<Faction> enemies = a.getFaction().getCommonEnemies();
       for (Faction each : enemies)
@@ -130,13 +131,13 @@ public abstract class POM implements ActorNPC, ActorInterface, Named
    }
 
    @Override
-   public void setHostile(ActorInterface a)
+   public void setHostile(IActor a)
    {
       l_explicitEnemies.add(a);
    }
 
    @Override
-   public void addInventoryItem(InventoryItemInterface i)
+   public void addInventoryItem(IInventoryItem i)
    {
       l_inventoryList.add(i);
    }

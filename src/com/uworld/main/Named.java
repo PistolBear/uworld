@@ -3,13 +3,13 @@ package com.uworld.main;
 /**
  * The Named abstract class is for use with things that may not necessarily be
  * within the realm of being interacted with by the player, but may still want
- * to have a stored name and description. As such, BaseInteractable grabs these
+ * to have a stored name and description. As such, IBaseInteractable grabs these
  * methods too. Because of this, Named also is a parent to things like
  * Ability, Skill, etc.
  * 
  * @author woody
  */
-public interface Named extends BaseInteractable
+public interface Named extends IBaseInteractable
 {
    String s_descriptionShort = "Object description";
 

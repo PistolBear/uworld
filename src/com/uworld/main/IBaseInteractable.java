@@ -1,6 +1,6 @@
 package com.uworld.main;
 
-public interface BaseInteractable
+public interface IBaseInteractable
 {
    public final boolean b_canInteract = true;
 

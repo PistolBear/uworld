@@ -2,10 +2,11 @@ package com.uworld.main;
 
 import java.util.ArrayList;
 
-import com.uworld.actors.ActorInterface;
-import com.uworld.fantasyobjects.InventoryItemInterface;
+import com.uworld.actors.Faction;
+import com.uworld.actors.IActor;
+import com.uworld.fantasyobjects.IInventoryItem;
 
-public class Nobody implements BaseInteractable, ActorInterface
+public class Nobody implements IBaseInteractable, IActor
 {
 
    @Override
@@ -28,7 +29,7 @@ public class Nobody implements BaseInteractable, ActorInterface
    }
 
    @Override
-   public ArrayList<InventoryItemInterface> getInventoryList()
+   public ArrayList<IInventoryItem> getInventoryList()
    {
       return null;
    }
@@ -76,21 +77,21 @@ public class Nobody implements BaseInteractable, ActorInterface
    }
 
    @Override
-   public boolean getHostile(ActorInterface a)
+   public boolean getHostile(IActor a)
    {
       // TODO Auto-generated method stub
       return false;
    }
 
    @Override
-   public void setHostile(ActorInterface a)
+   public void setHostile(IActor a)
    {
       // TODO Auto-generated method stub
 
    }
 
    @Override
-   public void addInventoryItem(InventoryItemInterface i)
+   public void addInventoryItem(IInventoryItem i)
    {
       // TODO Auto-generated method stub
 

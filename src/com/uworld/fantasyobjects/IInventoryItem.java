@@ -5,7 +5,7 @@ package com.uworld.fantasyobjects;
  * 
  * @author woody
  */
-public interface InventoryItemInterface extends FantasyObjectInterface
+public interface IInventoryItem extends FantasyObjectInterface
 {
    boolean m_inventoryItem = true;
 

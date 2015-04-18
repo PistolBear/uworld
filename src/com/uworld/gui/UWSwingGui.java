@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
-import com.uworld.main.GameEngine.TopLevelMenuOptions;
+import com.uworld.main.GameInterface.*;
 
 /**
  * UWSwingGui class
@@ -35,11 +35,12 @@ public final class UWSwingGui extends JFrame
    private JPanel bottomPanel;
    private static boolean b_usingGui = false;
    private static boolean b_menuShowing = false;
-   // private static GameEngine ge_engine;
+   // private static ZorkGameEngine ge_engine;
    private final GuiObserver go_observer;
    private static final Dimension d_panelDimension = new Dimension(800, 600);
    private static final JLabel s_statusLabel = new JLabel("", JLabel.CENTER);
    private static UWSwingGui guiFrame = null;
+   private static boolean b_modeHasBeenSet = false;
    
 
    
@@ -71,6 +72,11 @@ public final class UWSwingGui extends JFrame
       if (guiFrame == null)
       {
          guiFrame = new UWSwingGui();
+      }
+      
+      if (!b_modeHasBeenSet)
+      {
+         setMode(1);
       }
       
       guiFrame.setLayout(new BorderLayout());
@@ -217,11 +223,21 @@ public final class UWSwingGui extends JFrame
 
 
    /**
+    * setMode
+    * UWSwingGui setMode receives an int returned from the JOptionPane.showConfirmDialog method.
+    * 0 = Yes    (b_usingGui == true)
+    * 1 = No     (b_usingGui == false)
+    * 2 = Cancel (b_usingGui == false)
+    * 
+    * On a 2, this method should not even get called, because the program should exit.
+    * 
     * @param answer
     */
    public static void setMode(int answer)
    {
-      b_usingGui = answer == 0 ? true : false;
+      b_modeHasBeenSet  = true;
+      b_usingGui = (answer == 0 ? true : false);
+      
       if (guiFrame == null)
       {
          guiFrame = prepareGui();
@@ -246,7 +262,7 @@ public final class UWSwingGui extends JFrame
       pane.setSize(200, 100);
       pane.setFocusable(true);
       pane.setToolTipText("Choose something!");
-      int result = pane.showOptionDialog(null, "Options", "Menu Screen", 0, 
+      int result = JOptionPane.showOptionDialog(null, "Options", "Menu Screen", 0, 
                JOptionPane.INFORMATION_MESSAGE, null, TopLevelMenuOptions.values(), null);
       switch (result)
       {

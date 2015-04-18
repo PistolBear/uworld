@@ -2,7 +2,7 @@ package com.uworld.fantasyobjects;
 
 import com.uworld.main.Named;
 
-public abstract class Weapon implements Named, InventoryItemInterface
+public abstract class Weapon implements Named, IInventoryItem
 {
    protected boolean b_melee;
    protected boolean b_loaded;

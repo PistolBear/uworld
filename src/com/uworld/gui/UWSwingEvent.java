@@ -30,6 +30,10 @@ public class UWSwingEvent extends EventObject
    {
       super(source);
       
+      if (source instanceof JButton)
+      {
+         System.out.println("Button event");
+      }
    }
    
    

@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.uworld.fantasyobjects.InventoryItemInterface;
-import com.uworld.main.BaseInteractable;
+import com.uworld.fantasyobjects.IInventoryItem;
+import com.uworld.main.IBaseInteractable;
 
-public interface ActorInterface extends BaseInteractable
+public interface IActor extends IBaseInteractable
 {
    public int getArmorValue();
    public String getArmorType();
@@ -17,9 +17,9 @@ public interface ActorInterface extends BaseInteractable
    public int getInventorySize();
    public int getInventoryEncumberance();
    public int getGold();
-   public boolean getHostile(ActorInterface a);
-   public void setHostile(ActorInterface a);
-   public void addInventoryItem(InventoryItemInterface i);
+   public boolean getHostile(IActor a);
+   public void setHostile(IActor a);
+   public void addInventoryItem(IInventoryItem i);
    public void addGold(double g);
    public void setSkill(SkillName s, int value);
    public void modSkill(SkillName s, int value);
@@ -75,60 +75,6 @@ public interface ActorInterface extends BaseInteractable
             default:
                return AbilityName.NON;
          }
-      }
-   }
-   
-   public enum Faction
-   {
-      COMMONER, MILITARY, TRAINER, CLERGY_GOOD, CLERGY_EVIL, NOBLE, HIGH_COMMONER, SLUM, 
-      REDBEAK, PIRATE, NORTHERNER, SOUTHERNER, WESTERNER, EASTERNER, MINIQUEST, CELESTIAL,
-      INFERNAL, BANDIT, ERUDITE, ABNEGATE, ARCANA, STRANDS_OF_THE_EAST, HALFBLOOD, FULLBLOOD,
-      SPECIAL0, SPECIAL1, SPECIAL2, SPECIAL3, SPECIAL4, SPECIAL5, ALL, NONE;
-
-      /**
-       * @return
-       */
-      public List<Faction> getCommonEnemies()
-      {
-         LinkedList<Faction> enemies = new LinkedList<Faction>();
-         switch (this)
-         {
-            
-            case COMMONER:
-               enemies.add(ERUDITE);
-            case ERUDITE:
-               enemies.add(NOBLE);
-            case NOBLE:
-            case MILITARY:
-               enemies.add(INFERNAL);
-               enemies.add(REDBEAK);
-               enemies.add(PIRATE);
-               enemies.add(BANDIT);
-               enemies.add(STRANDS_OF_THE_EAST);
-               break;
-               
-               
-            case HALFBLOOD:
-               enemies.add(FULLBLOOD);
-            case FULLBLOOD:
-               enemies.add(HALFBLOOD);
-               break;
-               
-            case CELESTIAL:
-               enemies.clear();
-               enemies.add(INFERNAL);
-               break;
-               
-            case INFERNAL:
-               Faction [] f = new Faction[] {COMMONER, MILITARY, TRAINER, CLERGY_GOOD, CLERGY_EVIL, NOBLE, HIGH_COMMONER, 
-                        SLUM, REDBEAK, PIRATE, NORTHERNER, SOUTHERNER, WESTERNER, EASTERNER, MINIQUEST, CELESTIAL,
-                        INFERNAL, BANDIT, ERUDITE, ABNEGATE, ARCANA, STRANDS_OF_THE_EAST, HALFBLOOD, FULLBLOOD};
-               enemies.addAll(Arrays.asList(f));
-               enemies.remove(INFERNAL);
-               break;
-         }
-         
-         return enemies;
       }
    }
 }
