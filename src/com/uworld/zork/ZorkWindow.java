@@ -21,54 +21,80 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.uworld.main.GameInterface;
-
 /**
+ * ZorkWindow<br><br>
+ * 
+ * This class describes the actual visual components and their behavior.<br>
+ * There is nothing beyond view interpretation at this level, everything<br>
+ * that is part of the game should be handled by the GameEngine or one<br>
+ * of its componenets.<br><br>
+ * 
+ * This class is a KeyListener to handle the key presses.  Each button added<br>
+ * has its own anonymous ActionListener to handle button events.<br><br>
+ * 
  * @author PistolBear
  */
 @SuppressWarnings("serial")
-public class ZorkWindow extends JFrame implements KeyListener, ActionListener
+public class ZorkWindow extends JFrame implements KeyListener
 {
-   private static ZorkParser reader;
-
+   private static ZorkReader reader;
    private static boolean DEBUG_MODE = false;
-
-   private JTextField inputField;
-
-   private JTextArea outputArea;
-
-   private JButton buttonA;
-
-   private JButton buttonB;
-
-   private JButton btnClearAll;
-
+   JTextField m_inputField;
+   JTextArea outputArea;
+   
+   // Swing buttons on the console-screen.
+   private JButton m_buttonA;
+   private JButton m_buttonB;
+   private JButton m_btnClearAll;
    private JScrollPane scrollPane;
-
-   private ZorkTextFormatter writer;
+   private ZorkWriter writer;
 
    static final String NEWLINE = System.getProperty("line.separator");
+   private JLabel m_topLabel;
 
    public ZorkWindow()
    {
-      reader = new ZorkParser();
-      writer = new ZorkTextFormatter();
-
+      // These drive input and output, respectively.
+      reader = new ZorkReader();
+      writer = new ZorkWriter();
+      
+      // You never go back
       setForeground(Color.BLACK);
+      
+      // Border layout is easy for this simplistic layout
       getContentPane().setLayout(new BorderLayout(0, 0));
 
+      // Components are the pieces of the window (button,
+      // TextArea, etc.  See the addComponents() JDoc.
       addComponents();
 
+      // Screw small screens
       setResizable(false);
 
+      // We want people to be able to hit the "X"
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+      // Pack organizes components
+      pack();
+      
+      // Centers screen (must be after pack())
+      setLocationRelativeTo(null);
    }
 
+   /**
+    * addComponents()
+    * 
+    * Swing components are initialized here and set to standard
+    * labels and positions.  Initially, three buttons, an input
+    * TextField and an output TextArea are created, with space
+    * for additional things.
+    * 
+    */
    private void addComponents()
    {
-      JLabel lblUworld = new JLabel("UWorld");
-      lblUworld.setHorizontalAlignment(getWidth() / 2);
-      getContentPane().add(lblUworld, BorderLayout.NORTH);
+      m_topLabel = new JLabel("UWorld");
+      m_topLabel.setHorizontalAlignment(getWidth() / 2);
+      getContentPane().add(m_topLabel, BorderLayout.NORTH);
 
       scrollPane = new JScrollPane();
       getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -76,139 +102,95 @@ public class ZorkWindow extends JFrame implements KeyListener, ActionListener
       outputArea = new JTextArea();
       outputArea.setBackground(Color.BLACK);
       outputArea.setForeground(Color.WHITE);
-      outputArea.setRows(12);
+      outputArea.setRows(30);
       outputArea.setColumns(1);
       outputArea.setEditable(false);
 
       scrollPane.setViewportView(outputArea);
 
-      JPanel panel = new JPanel();
-      getContentPane().add(panel, BorderLayout.SOUTH);
+      // Panel for input components' bag constraints
       GridBagLayout gbl_panel = new GridBagLayout();
       gbl_panel.columnWidths = new int[] { 432 / 3, 432 / 3, 432 / 3 };
       gbl_panel.rowHeights = new int[] { 30, 22, 0 };
       gbl_panel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
       gbl_panel.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+      
+      // Place panel below outputArea
+      JPanel panel = new JPanel();
+      getContentPane().add(panel, BorderLayout.SOUTH);
       panel.setLayout(gbl_panel);
 
-      buttonA = new JButton("A");
+      
+      
+      // Button constraints object
       GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
       gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
       gbc_btnNewButton.gridx = 0;
       gbc_btnNewButton.gridy = 0;
-      panel.add(buttonA, gbc_btnNewButton);
 
-      buttonB = new JButton("B");
-      GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-      gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-      gbc_btnNewButton_1.gridx = 1;
-      gbc_btnNewButton_1.gridy = 0;
-      panel.add(buttonB, gbc_btnNewButton_1);
+      // Place first button
+      m_buttonA = new JButton("A");
+      panel.add(m_buttonA, gbc_btnNewButton);
 
-      btnClearAll = new JButton("Clear");
-      btnClearAll.addActionListener(this);
-      GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-      gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
-      gbc_btnNewButton_2.gridx = 2;
-      gbc_btnNewButton_2.gridy = 0;
-      panel.add(btnClearAll, gbc_btnNewButton_2);
+      // Move next button right one
+      gbc_btnNewButton.gridx = 1;
+      
+      // Place second button
+      m_buttonB = new JButton("B");
+      panel.add(m_buttonB, gbc_btnNewButton);
 
-      inputField = new JTextField();
-      inputField.addKeyListener(this);
+      // Clear button is slightly different size, and moved all the
+      // way to the right (there are three columns).
+      gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+      gbc_btnNewButton.gridx = 2;
+      
+      // Place last button (clear button).
+      m_btnClearAll = new JButton("Clear");
+      m_btnClearAll.addActionListener(new ActionListener(){
+         /** Handle the clear button clicked event. */
+         public void actionPerformed(ActionEvent e)
+         {
+            // Clear the text components.
+            outputArea.setText("");
+            m_inputField.setText("");
+
+            // Return the focus to the typing area.
+            m_inputField.requestFocusInWindow();
+         }
+      });
+      panel.add(m_btnClearAll, gbc_btnNewButton);
+
+      
+      
+      // Input field (one line)
+      m_inputField = new JTextField();
+      m_inputField.addKeyListener(this);
+      m_inputField.setColumns(80);
+      m_inputField.setFocusCycleRoot(true);
+      m_inputField.setFocusTraversalKeysEnabled(false);
+
+      // Input field bag constraints
       GridBagConstraints gbc_textField = new GridBagConstraints();
       gbc_textField.gridwidth = 3;
       gbc_textField.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField.gridx = 0;
       gbc_textField.gridy = 1;
-      panel.add(inputField, gbc_textField);
-      inputField.setColumns(80);
-      inputField.setFocusCycleRoot(true);
-      inputField.setFocusTraversalKeysEnabled(false);
+      
+      // Place input field
+      panel.add(m_inputField, gbc_textField);
    }
 
    /**
+    * Standard display call, can be used if it was hidden<br>
+    * for any reason.  Does not re-add components
     * 
     */
    public void createAndShowGUI()
    {
       pack();
+      setLocationRelativeTo(null);
       setVisible(true);
-      inputField.requestFocus();
-   }
-
-   /**
-    * We have to jump through some hoops to avoid trying to print non-printing
-    * characters such as Shift. (Not only do they not print, but if you put them
-    * in a String, the characters afterward won't show up in the text area.)
-    */
-   private void displayDebugInfo(KeyEvent e, String keyStatus)
-   {
-
-      // You should only rely on the key char if the event
-      // is a key typed event.
-      int id = e.getID();
-      String keyString;
-      if (id == KeyEvent.KEY_TYPED)
-      {
-         char c = e.getKeyChar();
-         keyString = "key character = '" + c + "'";
-      }
-      else
-      {
-         int keyCode = e.getKeyCode();
-         keyString = "key code = " + keyCode + " (" + KeyEvent.getKeyText(keyCode) + ")";
-      }
-
-      int modifiersEx = e.getModifiersEx();
-      String modString = "extended modifiers = " + modifiersEx;
-      String tmpString = KeyEvent.getModifiersExText(modifiersEx);
-      if (tmpString.length() > 0)
-      {
-         modString += " (" + tmpString + ")";
-      }
-      else
-      {
-         modString += " (no extended modifiers)";
-      }
-
-      String actionString = "action key? ";
-      if (e.isActionKey())
-      {
-         actionString += "YES";
-      }
-      else
-      {
-         actionString += "NO";
-      }
-
-      String locationString = "key location: ";
-
-      // Standard means number keys on the top row, otherwise they'll be on the
-      // numpad (usually).
-      int location = e.getKeyLocation();
-      if (location == KeyEvent.KEY_LOCATION_STANDARD)
-      {
-         locationString += "standard";
-      }
-      else if (location == KeyEvent.KEY_LOCATION_LEFT)
-      {
-         locationString += "left";
-      }
-      else if (location == KeyEvent.KEY_LOCATION_RIGHT)
-      {
-         locationString += "right";
-      }
-      else if (location == KeyEvent.KEY_LOCATION_NUMPAD)
-      {
-         locationString += "numpad";
-      }
-      else
-      { // (location == KeyEvent.KEY_LOCATION_UNKNOWN)
-         locationString += "unknown";
-      }
-
-      outputArea.append(keyStatus + NEWLINE + "    " + keyString + NEWLINE + "    " + modString + NEWLINE + "    " + actionString + NEWLINE + "    " + locationString + NEWLINE);
-      outputArea.setCaretPosition(outputArea.getDocument().getLength());
+      m_inputField.requestFocus();
    }
 
    /** Handle the key typed event from the text field. */
@@ -216,7 +198,7 @@ public class ZorkWindow extends JFrame implements KeyListener, ActionListener
    {
       if (DEBUG_MODE)
       {
-         displayDebugInfo(e, "KEY TYPED: ");
+         reader.debugInfo(this, e, "KEY TYPED: ");
       }
    }
 
@@ -225,7 +207,7 @@ public class ZorkWindow extends JFrame implements KeyListener, ActionListener
    {
       if (DEBUG_MODE)
       {
-         displayDebugInfo(e, "KEY PRESSED: ");
+         reader.debugInfo(this, e, "KEY PRESSED: ");
       }
    }
 
@@ -234,52 +216,20 @@ public class ZorkWindow extends JFrame implements KeyListener, ActionListener
    {
       String outputStringFromEngine = null;
 
+      if (e.getSource() != m_inputField)
+      {
+         // We don't care if input happens outside of the inputField
+         return;
+      }
+      
       if (DEBUG_MODE)
       {
-         displayDebugInfo(e, "KEY RELEASED: ");
+         reader.debugInfo(this, e, "KEY RELEASED: ");
       }
 
       else
       {
-         if (e.getSource() == inputField)
-         {
-            if (KeyEvent.VK_ENTER == e.getKeyCode())
-            {
-               outputStringFromEngine = reader.tokenize(inputField.getText());
-
-               if (outputStringFromEngine.contains(GameInterface.EXIT_COMMAND))
-               {
-                  outputArea.setText("Exiting...");
-                  dispose();
-               }
-
-               outputArea.append(NEWLINE + outputStringFromEngine + NEWLINE);
-               outputArea.setCaretPosition(outputArea.getDocument().getLength());
-               
-               inputField.setText("");
-
-            }
-
-            else if (e.isActionKey())
-            {
-               outputStringFromEngine = reader.tokenize(KeyEvent.getKeyText(e.getKeyCode()));
-               outputArea.append(NEWLINE + outputStringFromEngine + NEWLINE);
-               outputArea.setCaretPosition(outputArea.getDocument().getLength());
-
-            }
-         }
+         reader.handleKeyPress(this, e);
       }
    }
-
-   /** Handle the button click. */
-   public void actionPerformed(ActionEvent e)
-   {
-      // Clear the text components.
-      outputArea.setText("");
-      inputField.setText("");
-
-      // Return the focus to the typing area.
-      inputField.requestFocusInWindow();
-   }
-
 }

@@ -20,7 +20,7 @@ public class DualWeapon extends Weapon
    }
 
    /* (non-Javadoc)
-    * @see com.uworld.main.Named#getName()
+    * @see com.uworld.main.NamedInteractable#getName()
     */
    @Override
    public String getName()
@@ -30,20 +30,20 @@ public class DualWeapon extends Weapon
    }
 
    /* (non-Javadoc)
-    * @see com.uworld.main.Named#shortDesc()
+    * @see com.uworld.main.NamedInteractable#shortDesc()
     */
    @Override
-   public String shortDesc()
+   public String getShortDesc()
    {
       // TODO Auto-generated method stub
       return null;
    }
 
    /* (non-Javadoc)
-    * @see com.uworld.main.Named#longDesc()
+    * @see com.uworld.main.NamedInteractable#longDesc()
     */
    @Override
-   public String longDesc()
+   public String getLongDesc()
    {
       // TODO Auto-generated method stub
       return null;
@@ -53,14 +53,14 @@ public class DualWeapon extends Weapon
     * @see com.uworld.main.IBaseInteractable#indirectDamage(int, com.uworld.main.DamageType)
     */
    @Override
-   public void indirectDamage(int d, DamageType damageType)
+   public void receiveDamage(int d, DamageType damageType)
    {
       // TODO Auto-generated method stub
       
    }
 
    /* (non-Javadoc)
-    * @see com.uworld.main.Named#setDescriptionLong(java.lang.String)
+    * @see com.uworld.main.NamedInteractable#setDescriptionLong(java.lang.String)
     */
    @Override
    public void setDescriptionLong(String s)

@@ -1,4 +1,4 @@
-package com.uworld.actors;
+package dialog;
 
 /**
  * Dialogue Interface provides the framework for creating Dialogue objects that

@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 
-import com.uworld.main.GameInterface;
+import com.uworld.main.GameEngine;
 
 /**
  * 
@@ -43,7 +43,7 @@ import com.uworld.main.GameInterface;
  */
 final class GuiObserver extends WindowAdapter implements ActionListener
 {
-   private static GameInterface ge_engine; 
+   private static GameEngine ge_engine; 
    GuiObserver()
    {
       // TODO: set up gui stuff

@@ -8,7 +8,15 @@ public interface IBaseInteractable
 
    public void directDamage(int d);
    
-   void indirectDamage(int d, DamageType damageType);
+   /**
+    * This is the normal method for an interactable object to get
+    * damaged.  This method's implementation should take into account
+    * all forms of weaknesses, resistances, armor, etc. that the object
+    * has vs the incoming DamageType.
+    * @param d
+    * @param damageType
+    */
+   void receiveDamage(int d, DamageType damageType);
 
    public void removeDamage(int d);
 

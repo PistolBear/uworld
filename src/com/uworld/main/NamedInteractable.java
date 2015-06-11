@@ -1,15 +1,15 @@
 package com.uworld.main;
 
 /**
- * The Named abstract class is for use with things that may not necessarily be
+ * The NamedInteractable abstract class is for use with things that may not necessarily be
  * within the realm of being interacted with by the player, but may still want
  * to have a stored name and description. As such, IBaseInteractable grabs these
- * methods too. Because of this, Named also is a parent to things like
+ * methods too. Because of this, NamedInteractable also is a parent to things like
  * Ability, Skill, etc.
  * 
  * @author woody
  */
-public interface Named extends IBaseInteractable
+public interface NamedInteractable extends IBaseInteractable
 {
    String s_descriptionShort = "Object description";
 
@@ -29,10 +29,19 @@ public interface Named extends IBaseInteractable
     */
    public void setDescriptionLong(String s);
    
+   /**
+    * @return  A name, like "Greatsword" or "Jimmy".
+    */
    public String getName();
 
-   public String shortDesc();
+   /**
+    * @return A short description of this thing 
+    */
+   public String getShortDesc();
 
-   public String longDesc();
+   /**
+    * @return A longer description of this thing.  May have important info.
+    */
+   public String getLongDesc();
 
 }

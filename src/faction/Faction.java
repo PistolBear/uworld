@@ -8,7 +8,7 @@
  * Desc:
  * Tags:
  */
-package com.uworld.actors;
+package faction;
 
 /**
  * @author PistolBear

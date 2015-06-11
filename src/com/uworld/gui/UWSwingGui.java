@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
-import com.uworld.main.GameInterface.*;
+import com.uworld.main.GameEngine.*;
 
 /**
  * UWSwingGui class

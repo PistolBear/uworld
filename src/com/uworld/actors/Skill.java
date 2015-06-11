@@ -3,9 +3,9 @@ package com.uworld.actors;
 import java.util.List;
 
 import com.uworld.actors.IActor.AbilityName;
-import com.uworld.main.Named;
+import com.uworld.main.NamedInteractable;
 
-public abstract class Skill implements Named
+public abstract class Skill implements NamedInteractable
 {
    Ability[] a_parentAbility;
    Double d_value = 0.0;
@@ -26,7 +26,7 @@ public abstract class Skill implements Named
       return a_parentAbility;
    }
 
-   public String longDesc()
+   public String getLongDesc()
    {
       return s_descriptionLong;
    }

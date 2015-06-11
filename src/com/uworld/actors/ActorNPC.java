@@ -1,5 +1,7 @@
 package com.uworld.actors;
 
+import dialog.DialogueInterface;
+
 public interface ActorNPC extends IActor
 {
    public boolean getLootable();

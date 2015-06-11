@@ -1,8 +1,8 @@
 package com.uworld.fantasyobjects;
 
-import com.uworld.main.Named;
+import com.uworld.main.NamedInteractable;
 
-public abstract class Weapon implements Named, IInventoryItem
+public abstract class Weapon implements NamedInteractable, IInventoryItem
 {
    protected boolean b_melee;
    protected boolean b_loaded;

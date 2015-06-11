@@ -1,4 +1,4 @@
-package com.uworld.main;
+package map;
 
 import java.awt.Point;
 

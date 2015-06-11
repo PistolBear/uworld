@@ -13,14 +13,14 @@ package com.uworld.zork;
 import java.io.Console;
 
 /**
- * ZorkTextFormatter
+ * ZorkWriter
  * 
  * This class to handle the output for Zork-like interaction.
  * 
  * @author PistolBear
  * 
  */
-public class ZorkTextFormatter implements TextOutputMessageIF
+public class ZorkWriter implements TextOutputMessageIF
 {
    Boolean f;
 

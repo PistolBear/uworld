@@ -2,10 +2,17 @@ package com.uworld.main;
 
 import java.util.ArrayList;
 
-import com.uworld.actors.Faction;
 import com.uworld.actors.IActor;
 import com.uworld.fantasyobjects.IInventoryItem;
 
+import faction.Faction;
+
+/**
+ * NullClass that allows for testing certain scenarios.
+ * 
+ * @author PistolBear
+ *
+ */
 public class Nobody implements IBaseInteractable, IActor
 {
 
@@ -18,104 +25,83 @@ public class Nobody implements IBaseInteractable, IActor
    @Override
    public void directDamage(int d)
    {
-      // No-op
    }
 
    @Override
    public void removeDamage(int d)
    {
-      // No-op
-
    }
 
    @Override
    public ArrayList<IInventoryItem> getInventoryList()
    {
-      return null;
+      return new ArrayList<IInventoryItem>();
    }
 
    @Override
    public void modSkill(SkillName s, int value)
    {
-      // no-op
-
    }
 
    @Override
-   public void indirectDamage(int d, DamageType damageType)
+   public void receiveDamage(int d, DamageType damageType)
    {
-      // no-op
-      
    }
    
    @Override
    public int getInventorySize()
    {
-      // TODO Auto-generated method stub
       return 0;
    }
 
    @Override
    public int getGold()
    {
-      // TODO Auto-generated method stub
       return 0;
    }
 
    @Override
    public int getArmorValue()
    {
-      // TODO Auto-generated method stub
       return 0;
    }
 
    @Override
-   public String getArmorType()
+   public ArmorType getArmorType()
    {
-      // TODO Auto-generated method stub
-      return null;
+      return ArmorType.NONE;
    }
 
    @Override
    public boolean getHostile(IActor a)
    {
-      // TODO Auto-generated method stub
       return false;
    }
 
    @Override
    public void setHostile(IActor a)
    {
-      // TODO Auto-generated method stub
-
    }
 
    @Override
    public void addInventoryItem(IInventoryItem i)
    {
-      // TODO Auto-generated method stub
-
    }
 
    @Override
    public void addGold(double g)
    {
-      // TODO Auto-generated method stub
-
    }
 
    @Override
    public int getInventoryEncumberance()
    {
-      // TODO Auto-generated method stub
       return 0;
    }
 
    @Override
    public void setSkill(SkillName s, int value)
    {
-      // TODO Auto-generated method stub
-
    }
 
    @Override

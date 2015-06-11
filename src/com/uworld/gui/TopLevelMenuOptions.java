@@ -3,26 +3,26 @@
  * 
  * File name:
  * Author: PistolBear
- * Created: Dec 3, 2014
+ * Created: May 13, 2015
  * 
  * Desc:
  * Tags:
  */
-package com.uworld.main;
+package com.uworld.gui;
 
 /**
  * @author PistolBear
  *
  */
-public enum DamageType 
+public class TopLevelMenuOptions
 {
-   STABBY, POINTY, HITTY, FIREY, ICEY, SHOCKY, DIRECT;
 
    /**
     * @return
     */
-   public String getResistances()
+   public static Object[] values()
    {
+      // TODO Auto-generated method stub
       return null;
    }
 

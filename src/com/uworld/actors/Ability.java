@@ -3,9 +3,9 @@ package com.uworld.actors;
 import java.util.List;
 
 import com.uworld.actors.IActor.AbilityName;
-import com.uworld.main.Named;
+import com.uworld.main.NamedInteractable;
 
-public abstract class Ability implements Named
+public abstract class Ability implements NamedInteractable
 {
    private int i_score;
 

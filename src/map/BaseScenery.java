@@ -1,6 +1,8 @@
-package com.uworld.main;
+package map;
 
 import java.util.List;
+
+import com.uworld.main.IBaseInteractable;
 
 /**
  * This interface provides the groundwork for objects which may appear on-screen

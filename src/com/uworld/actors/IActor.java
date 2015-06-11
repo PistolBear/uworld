@@ -1,18 +1,17 @@
 package com.uworld.actors;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.uworld.fantasyobjects.IInventoryItem;
+import com.uworld.main.ArmorType;
 import com.uworld.main.IBaseInteractable;
+
+import faction.Faction;
 
 public interface IActor extends IBaseInteractable
 {
    public int getArmorValue();
-   public String getArmorType();
-   @SuppressWarnings("rawtypes")
+   public ArmorType getArmorType();
    public List getInventoryList();
    public int getInventorySize();
    public int getInventoryEncumberance();
